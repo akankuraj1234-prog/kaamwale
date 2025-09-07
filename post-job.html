@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job - Kaamwale</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .job-form-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #4a6cf7, #3b5be3);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .form-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            opacity: 0.9;
+        }
+
+        .form-content {
+            padding: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title i {
+            color: #4a6cf7;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4a6cf7;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #4a6cf7;
+            background: #f8f9ff;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .checkbox-item.selected {
+            border-color: #4a6cf7;
+            background: #4a6cf7;
+            color: white;
+        }
+
+        .urgency-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .urgency-option {
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .urgency-option:hover {
+            border-color: #4a6cf7;
+            background: #f8f9ff;
+        }
+
+        .urgency-option.selected {
+            border-color: #4a6cf7;
+            background: #4a6cf7;
+            color: white;
+        }
+
+        .urgency-option .urgency-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .urgency-option .urgency-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .urgency-option .urgency-desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .budget-range {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .budget-input {
+            flex: 1;
+        }
+
+        .budget-separator {
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-primary {
+            background: #4a6cf7;
+            color: white;
+            min-width: 150px;
+        }
+
+        .btn-primary:hover {
+            background: #3b5be3;
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .preview-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .preview-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .job-preview {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #4a6cf7;
+        }
+
+        .job-preview h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-preview .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .job-preview .job-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .urgency-selector {
+                grid-template-columns: 1fr;
+            }
+
+            .budget-range {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-briefcase"></i> Post a Job</h1>
+            <p>Find the perfect worker for your project</p>
+        </div>
+
+        <div class="job-form-container">
+            <div class="form-header">
+                <h2>Job Details</h2>
+                <p>Fill in the information below to post your job</p>
+            </div>
+
+            <div class="form-content">
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    Job posted successfully! Workers will start applying soon.
+                </div>
+
+                <form id="jobForm">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            Basic Information
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label for="jobTitle">Job Title *</label>
+                                <input type="text" id="jobTitle" name="jobTitle" 
+                                    placeholder="e.g., Electrical repair in kitchen" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobCategory">Category *</label>
+                                <select id="jobCategory" name="jobCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="electrician">Electrician</option>
+                                    <option value="plumber">Plumber</option>
+                                    <option value="carpenter">Carpenter</option>
+                                    <option value="painter">Painter</option>
+                                    <option value="cleaner">Cleaner</option>
+                                    <option value="gardener">Gardener</option>
+                                    <option value="appliance">Appliance Repair</option>
+                                    <option value="construction">Construction</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobLocation">Location *</label>
+                                <input type="text" id="jobLocation" name="jobLocation" 
+                                    placeholder="Enter your area/city" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobDescription">Job Description *</label>
+                            <textarea id="jobDescription" name="jobDescription" 
+                                placeholder="Describe the work you need done, any specific requirements, and what you expect from the worker..." required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Skills Required -->
+                    <div class="form-section">
+                        <div class="section-title">
+                            <i class="fas fa-tools"></i>
+                            Skills Required
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Select required skills:</label>
+                            <div class="checkbox-group" id="skillsGroup">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="skill1" name="skills" value="basic-repair">
+                                    <label for="skill1">Basic Repair</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="skill2" name="skills" value="wiring">
+                                    <label for="skill2">Wiring</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="skill3" name="skills" value="installation">
+                                    <label for="skill3">Installation</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="skill4" name="skills" value="maintenance">
+                                    <label for="skill4">Maintenance</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="skill5" name="skills" value="emergency">
+                                    <label for="skill5">Emergency Service</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Budget & Timeline -->
+                    <div class="form-section">
+                        <div class="section-title">
+                            <i class="fas fa-rupee-sign"></i>
+                            Budget & Timeline
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="budgetType">Budget Type *</label>
+                                <select id="budgetType" name="budgetType" required>
+                                    <option value="">Select budget type</option>
+                                    <option value="fixed">Fixed Price</option>
+                                    <option value="hourly">Hourly Rate</option>
+                                    <option value="negotiable">Negotiable</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" id="budgetAmountGroup">
+                                <label for="budgetAmount">Budget Amount (₹)</label>
+                                <div class="budget-range">
+                                    <input type="number" class="budget-input" id="budgetMin" 
+                                        name="budgetMin" placeholder="Min">
+                                    <span class="budget-separator">to</span>
+                                    <input type="number" class="budget-input" id="budgetMax" 
+                                        name="budgetMax" placeholder="Max">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Job Urgency *</label>
+                            <div class="urgency-selector">
+                                <div class="urgency-option" data-urgency="low">
+                                    <div class="urgency-icon">🕐</div>
+                                    <div class="urgency-title">Flexible</div>
+                                    <div class="urgency-desc">Within a week</div>
+                                </div>
+                                <div class="urgency-option" data-urgency="medium">
+                                    <div class="urgency-icon">⚡</div>
+                                    <div class="urgency-title">Soon</div>
+                                    <div class="urgency-desc">Within 2-3 days</div>
+                                </div>
+                                <div class="urgency-option" data-urgency="high">
+                                    <div class="urgency-icon">🚨</div>
+                                    <div class="urgency-title">Urgent</div>
+                                    <div class="urgency-desc">Today/Tomorrow</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <div class="section-title">
+                            <i class="fas fa-user"></i>
+                            Contact Information
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="contactName">Your Name *</label>
+                                <input type="text" id="contactName" name="contactName" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contactPhone">Phone Number *</label>
+                                <input type="tel" id="contactPhone" name="contactPhone" 
+                                    placeholder="+91 9876543210" required>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="contactAddress">Complete Address *</label>
+                                <textarea id="contactAddress" name="contactAddress" 
+                                    placeholder="Enter your complete address where the work needs to be done..." required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job Preview -->
+                    <div class="preview-section">
+                        <div class="preview-title">Job Preview</div>
+                        <div class="job-preview" id="jobPreview">
+                            <h3 id="previewTitle">Your Job Title</h3>
+                            <div class="job-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> <span id="previewLocation">Location</span></span>
+                                <span><i class="fas fa-rupee-sign"></i> <span id="previewBudget">Budget</span></span>
+                                <span><i class="fas fa-clock"></i> <span id="previewUrgency">Urgency</span></span>
+                                <span><i class="fas fa-tag"></i> <span id="previewCategory">Category</span></span>
+                            </div>
+                            <p id="previewDescription">Job description will appear here...</p>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" onclick="goBack()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Post Job
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('jobForm');
+            const skillsGroup = document.getElementById('skillsGroup');
+            const urgencyOptions = document.querySelectorAll('.urgency-option');
+            const budgetTypeSelect = document.getElementById('budgetType');
+            
+            // Skills selection
+            skillsGroup.addEventListener('click', function(e) {
+                if (e.target.closest('.checkbox-item')) {
+                    const item = e.target.closest('.checkbox-item');
+                    const checkbox = item.querySelector('input[type="checkbox"]');
+                    
+                    if (e.target !== checkbox) {
+                        checkbox.checked = !checkbox.checked;
+                    }
+                    
+                    item.classList.toggle('selected', checkbox.checked);
+                    updatePreview();
+                }
+            });
+
+            // Urgency selection
+            urgencyOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    urgencyOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    updatePreview();
+                });
+            });
+
+            // Budget type change
+            budgetTypeSelect.addEventListener('change', function() {
+                const budgetAmountGroup = document.getElementById('budgetAmountGroup');
+                const budgetInputs = budgetAmountGroup.querySelectorAll('input');
+                
+                if (this.value === 'negotiable') {
+                    budgetInputs.forEach(input => {
+                        input.disabled = true;
+                        input.required = false;
+                    });
+                } else {
+                    budgetInputs.forEach(input => {
+                        input.disabled = false;
+                        input.required = this.value === 'fixed' || this.value === 'hourly';
+                    });
+                }
+                updatePreview();
+            });
+
+            // Real-time preview update
+            form.addEventListener('input', updatePreview);
+            form.addEventListener('change', updatePreview);
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!validateForm()) {
+                    return;
+                }
+
+                const submitBtn = form.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Posting Job...';
+
+                // Simulate job posting
+                setTimeout(() => {
+                    document.getElementById('successMessage').style.display = 'block';
+                    form.reset();
+                    resetFormState();
+                    updatePreview();
+                    
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Post Job';
+                    
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                }, 2000);
+            });
+
+            function validateForm() {
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.style.borderColor = '#dc3545';
+                        isValid = false;
+                    } else {
+                        field.style.borderColor = '#e9ecef';
+                    }
+                });
+
+                // Check if urgency is selected
+                const selectedUrgency = document.querySelector('.urgency-option.selected');
+                if (!selectedUrgency) {
+                    alert('Please select job urgency');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            function updatePreview() {
+                const formData = new FormData(form);
+                
+                // Update preview elements
+                document.getElementById('previewTitle').textContent = 
+                    formData.get('jobTitle') || 'Your Job Title';
+                
+                document.getElementById('previewLocation').textContent = 
+                    formData.get('jobLocation') || 'Location';
+                
+                document.getElementById('previewCategory').textContent = 
+                    formData.get('jobCategory') || 'Category';
+                
+                document.getElementById('previewDescription').textContent = 
+                    formData.get('jobDescription') || 'Job description will appear here...';
+
+                // Update budget
+                const budgetType = formData.get('budgetType');
+                const budgetMin = formData.get('budgetMin');
+                const budgetMax = formData.get('budgetMax');
+                
+                let budgetText = 'Budget';
+                if (budgetType === 'negotiable') {
+                    budgetText = 'Negotiable';
+                } else if (budgetMin && budgetMax) {
+                    budgetText = `₹${budgetMin} - ₹${budgetMax}`;
+                } else if (budgetMin) {
+                    budgetText = `₹${budgetMin}+`;
+                }
+                document.getElementById('previewBudget').textContent = budgetText;
+
+                // Update urgency
+                const selectedUrgency = document.querySelector('.urgency-option.selected');
+                if (selectedUrgency) {
+                    const urgencyTitle = selectedUrgency.querySelector('.urgency-title').textContent;
+                    document.getElementById('previewUrgency').textContent = urgencyTitle;
+                } else {
+                    document.getElementById('previewUrgency').textContent = 'Urgency';
+                }
+            }
+
+            function resetFormState() {
+                // Reset skills
+                document.querySelectorAll('.checkbox-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+
+                // Reset urgency
+                urgencyOptions.forEach(opt => opt.classList.remove('selected'));
+
+                // Reset budget inputs
+                const budgetInputs = document.querySelectorAll('.budget-input');
+                budgetInputs.forEach(input => {
+                    input.disabled = false;
+                    input.required = false;
+                });
+            }
+
+            // Initialize preview
+            updatePreview();
+        });
+
+        function goBack() {
+            if (confirm('Are you sure you want to go back? Your progress will be lost.')) {
+                window.history.back();
+            }
+        }
+    </script>
+</body>
+</html>

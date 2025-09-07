@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamwale Services</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+
+    <!-- style sheet -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background: url('bagim.png') no-repeat center center/cover;
+        min-height: 100vh;
+        color: #fff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f8f9fa;
+      }
+
+      /* Navigation Bar */
+      .navbar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+      }
+
+      /* Logo */
+      .nav-logo .logo-link {
+        text-decoration: none;
+      }
+
+      .logo-text {
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Navigation Menu */
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      .nav-item {
+        position: relative;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .nav-link.active {
+        background-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-link i {
+        font-size: 16px;
+      }
+
+      /* Auth Buttons */
+      .nav-auth {
+        display: flex;
+        gap: 15px;
+      }
+
+      .auth-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .login-btn {
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .login-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-2px);
+      }
+
+      .register-btn {
+        background-color: #fff;
+        color: #667eea;
+        border-color: #fff;
+      }
+
+      .register-btn:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .container {
+        text-align: center;
+        margin-top: 40px;
+        color: #fff;
+      }
+
+      .container h2 {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+      }
+
+      .container p {
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+      }
+
+      .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      .card {
+        background-color: #fff;
+        color: #333;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .card img {
+        width: 40px;
+        margin-bottom: 10px;
+      }
+
+      .card h3 {
+        margin-bottom: 5px;
+      }
+
+      .card p {
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        background: rgba(0, 0, 0, 0.6);
+      }
+    </style>
+
+
+  </head>
+
+  <body>
+
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <!-- Logo -->
+          <div class="nav-logo">
+            <a href="#" class="logo-link">
+              <span class="logo-text">Kaamwale</span>
+            </a>
+          </div>
+
+          <!-- Navigation Menu -->
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="index.html" class="nav-link active">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a href="worker.html" class="nav-link">
+                <i class="fas fa-hard-hat"></i>
+                 <i class="fas fa-hard-hat"></i>
+                <span>Workers</span>
+              </a>
+            </li>
+            <!-- New Service Item -->
+            <li class="nav-item">
+              <a href="service.html" class="nav-link">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Services</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="fas fa-question-circle"></i>
+                <span>Help</span>
+              </a>
+            </li>
+          </ul>
+
+         
+
+          <!-- Mobile Menu Toggle -->
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h2>Services</h2>
+
+
+      <div class="services">
+        <div class="card" data-page="electrician.html">
+          <img src="https://img.icons8.com/ios-filled/50/electricity.png" alt="">
+          <h3>Electrician</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="plumber.html">
+          <img src="https://img.icons8.com/ios-filled/50/plumber.png" alt="">
+          <h3>Plumber</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="carpenter.html">
+          <img src="https://img.icons8.com/ios-filled/50/hammer.png" alt="">
+          <h3>Carpenter</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="cleaner.html">
+          <img src="https://img.icons8.com/ios-filled/50/broom.png" alt="">
+          <h3>Cleaner</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="painter.html">
+          <img src="https://img.icons8.com/ios-filled/50/paint-brush.png" alt="">
+          <h3>Painter</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="ac.html">
+          <img src="https://img.icons8.com/ios-filled/50/fan.png" alt="">
+          <h3>AC Repair</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="appliance.html">
+          <img src="https://img.icons8.com/ios-filled/50/washing-machine.png" alt="">
+          <h3>Appliance Repair</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="gardn.html">
+          <img src="https://img.icons8.com/ios-filled/50/plant-under-sun.png" alt="">
+          <h3>Gardening</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="moving.html">
+          <img src="https://img.icons8.com/ios-filled/50/delivery.png" alt="">
+          <h3>Moving</h3>
+          <p>200+ workers</p>
+        </div>
+
+        <div class="card" data-page="beauty.html">
+          <img src="https://img.icons8.com/ios-filled/50/spa-flower.png" alt="">
+          <h3>Beauty & Wellness</h3>
+          <p>200+ workers</p>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 Kamwale. All Rights Reserved.</p>
+    </footer>
+    <!-- 
+    <script src="script.js"></script> -->
+
+    <script>
+
+      // sabhi cards ko select karo
+      const cards = document.querySelectorAll(".card");
+
+      // har card pe click event lagao
+      cards.forEach(card => {
+        card.addEventListener("click", () => {
+          const page = card.getAttribute("data-page");
+          window.location.href = page; // click hone pe redirect karega
+        });
+      });
+    </script>
+  </body>
+
+</html>

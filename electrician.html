@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Electrician Services - Hire Professionals</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f8f9fa;
+            }
+
+            /* Navigation Bar */
+            .navbar {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 70px;
+            }
+
+            /* Logo */
+            .nav-logo .logo-link {
+                text-decoration: none;
+            }
+
+            .logo-text {
+                font-size: 28px;
+                font-weight: bold;
+                color: #fff;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Navigation Menu */
+            .nav-menu {
+                display: flex;
+                list-style: none;
+                gap: 30px;
+            }
+
+            .nav-item {
+                position: relative;
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+            .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
+            .nav-link.active {
+                background-color: rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-link i {
+                font-size: 16px;
+            }
+
+            /* Auth Buttons */
+            .nav-auth {
+                display: flex;
+                gap: 15px;
+            }
+
+            .auth-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+
+            .login-btn {
+                color: #fff;
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .login-btn:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-2px);
+            }
+
+            .register-btn {
+                background-color: #fff;
+                color: #667eea;
+                border-color: #fff;
+            }
+
+            .register-btn:hover {
+                background-color: #f8f9fa;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .star-rating {
+                color: #fbbf24;
+            }
+
+            .availability-available {
+                background-color: #d1fafb;
+                color: #065f69;
+            }
+
+            .availability-unavailable {
+                background-color: #fafafa;
+                color: #7f7f7f;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f8f9fa;
+            }
+
+            /* Navigation Bar */
+            .navbar {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 70px;
+            }
+
+            /* Logo */
+            .nav-logo .logo-link {
+                text-decoration: none;
+            }
+
+            .logo-text {
+                font-size: 28px;
+                font-weight: bold;
+                color: #fff;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Navigation Menu */
+            .nav-menu {
+                display: flex;
+                list-style: none;
+                gap: 30px;
+            }
+
+            .nav-item {
+                position: relative;
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+            .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
+            .nav-link.active {
+                background-color: rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-link i {
+                font-size: 16px;
+            }
+
+            /* Auth Buttons */
+            .nav-auth {
+                display: flex;
+                gap: 15px;
+            }
+
+            .auth-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+
+            .login-btn {
+                color: #fff;
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .login-btn:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-2px);
+            }
+
+            .register-btn {
+                background-color: #fff;
+                color: #667eea;
+                border-color: #fff;
+            }
+
+            .register-btn:hover {
+                background-color: #f8f9fa;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .category-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+}
+
+.category-card:hover {
+  transform: translateY(-10px) scale(1.05); /* Moves up slightly and grows */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Shadow intensifies */
+}
+
+        </style>
+    </head>
+
+    <body class="bg-gray-100 text-gray-900">
+        <header>
+            <nav class="navbar">
+                <div class="nav-container">
+                    <!-- Logo -->
+                    <div class="nav-logo">
+                        <a href="#" class="logo-link">
+                            <span class="logo-text">Kaamwale</span>
+                        </a>
+                    </div>
+
+                    <!-- Navigation Menu -->
+                    <ul class="nav-menu">
+                        <li class="nav-item">
+                            <a href="service.html" class="nav-link active">
+                                <i class="fas fa-home"></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-hard-hat"></i>
+                                <span>Workers</span>
+                            </a>
+                        </li>
+                        <!-- New Service Item -->
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-concierge-bell"></i>
+                                <span>Services</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                  
+
+                    <!-- Mobile Menu Toggle -->
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="container mx-auto p-4">
+            <!-- Electrician Categories -->
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Service Categories</h2>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer" data-category="wiring">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/03e4003e-3b85-4187-bdcd-ede0c5513f90.png"
+                            alt="Detailed illustration of home electrical wiring setup with insulated cables and junction boxes in a modern house" />
+                        <h3 class="text-xl font-medium mt-2">Home Wiring</h3>
+                    </div>
+                    <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer"
+                        data-category="installation">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b7071d77-4ef4-4dfb-bfe6-04761d42dfa5.png"
+                            alt="Scene of electrician installing ceiling lights with ladder, tools, and wiring in a residential room" />
+                        <h3 class="text-xl font-medium mt-2">Installation</h3>
+                    </div>
+                    <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer" data-category="repairs">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9d9acf97-09f9-47b2-8beb-adfa514a9cb0.png"
+                            alt="Electrician fixing an electrical outlet with screwdriver and multimeter in a kitchen setting" />
+                        <h3 class="text-xl font-medium mt-2">Repairs</h3>
+                    </div>
+                    <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer"
+                        data-category="maintenance">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c2d274de-0e8c-45b6-96fd-29eaf823bf58.png"
+                            alt="Professional electrician performing routine panel maintenance checks with clipboard and tools" />
+                        <h3 class="text-xl font-medium mt-2">Maintenance</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Worker Profiles -->
+            <section id="workers">
+                <h2 class="text-2xl font-semibold mb-4">Available Electricians</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Worker 1 -->
+                    <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="wiring">
+                        <div class="flex items-center mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5ec18245-4b8f-428d-8f95-d0423effc5dc.png"
+                                alt="Friendly male electrician in blue uniform shirt with logo, wearing safety glasses, smiling professionally with toolbox in background"
+                                class="w-16 h-16 rounded-full mr-4" />
+                            <div>
+                                <h3 class="text-xl font-medium">John Doe</h3>
+                                <p class="text-gray-600">Specialist in Wiring</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-medium">Rating:</span>
+                            <div class="star-rating inline-block">
+                                ★★★★★ <span class="text-gray-700">(4.8/5)</span>
+                            </div>
+                        </div>
+                        <p class="mb-2"><span class="font-medium">Experience:</span> 15 years</p>
+                        <p class="mb-2"><span class="font-medium">Availability:</span> <span
+                                class="px-2 py-1 rounded-full text-sm availability-available">Available Today</span></p>
+                        <p class="font-medium mb-4">Cost: $50/hour</p>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire
+                            Now</button>
+                    </div>
+
+                    <!-- Worker 2 -->
+                    <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="installation">
+                        <div class="flex items-center mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5a7320c6-02a3-43f7-af4e-aee91c5fff59.png"
+                                alt="Professional female electrician in high-vis vest, holding clipboard, with tools and electrical panel visible in industrial setting"
+                                class="w-16 h-16 rounded-full mr-4" />
+                            <div>
+                                <h3 class="text-xl font-medium">Jane Smith</h3>
+                                <p class="text-gray-600">Expert in Installations</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-medium">Rating:</span>
+                            <div class="star-rating inline-block">
+                                ★★★★★ <span class="text-gray-700">(4.9/5)</span>
+                            </div>
+                        </div>
+                        <p class="mb-2"><span class="font-medium">Experience:</span> 10 years</p>
+                        <p class="mb-2"><span class="font-medium">Availability:</span> <span
+                                class="px-2 py-1 rounded-full text-sm availability-available">Available Tomorrow</span>
+                        </p>
+                        <p class="font-medium mb-4">Cost: $60/hour</p>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire
+                            Now</button>
+                    </div>
+
+                    <!-- Worker 3 -->
+                    <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="repairs">
+                        <div class="flex items-center mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/56121e65-ea1f-4722-86d6-da5b223af867.png"
+                                alt="Middle-aged electrician with beard, in work boots and gloves, repairing a switchboard in a dimly lit basement"
+                                class="w-16 h-16 rounded-full mr-4" />
+                            <div>
+                                <h3 class="text-xl font-medium">Mike Johnson</h3>
+                                <p class="text-gray-600">Repairs Specialist</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-medium">Rating:</span>
+                            <div class="star-rating inline-block">
+                                ★★★★☆ <span class="text-gray-700">(4.5/5)</span>
+                            </div>
+                        </div>
+                        <p class="mb-2"><span class="font-medium">Experience:</span> 12 years</p>
+                        <p class="mb-2"><span class="font-medium">Availability:</span> <span
+                                class="px-2 py-1 rounded-full text-sm availability-unavailable">Unavailable until
+                                Friday</span></p>
+                        <p class="font-medium mb-4">Cost: $55/hour</p>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire
+                            Now</button>
+                    </div>
+
+                    <!-- Worker 4 -->
+                    <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="maintenance">
+                        <div class="flex items-center mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c4c29a09-7b3d-4763-b091-fc0c4643858c.png"
+                                alt="Young electrician in clean uniform, inspecting electrical meter with testing device outdoors at a residential property"
+                                class="w-16 h-16 rounded-full mr-4" />
+                            <div>
+                                <h3 class="text-xl font-medium">Emma Davis</h3>
+                                <p class="text-gray-600">Maintenance Expert</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-medium">Rating:</span>
+                            <div class="star-rating inline-block">
+                                ★★★★★ <span class="text-gray-700">(5.0/5)</span>
+                            </div>
+                        </div>
+                        <p class="mb-2"><span class="font-medium">Experience:</span> 8 years</p>
+                        <p class="mb-2"><span class="font-medium">Availability:</span> <span
+                                class="px-2 py-1 rounded-full text-sm availability-available">Available Next Week</span>
+                        </p>
+                        <p class="font-medium mb-4">Cost: $45/hour</p>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire
+                            Now</button>
+                    </div>
+
+                    <!-- Worker 5 -->
+                    <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="wiring">
+                        <div class="flex items-center mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dfa77774-8f2d-45c4-898b-ecda632b7a77.png"
+                                alt="Experienced electrician with hard hat, measuring and planning wiring layout on blueprint in office"
+                                class="w-16 h-16 rounded-full mr-4" />
+                            <div>
+                                <h3 class="text-xl font-medium">Tom Wilson</h3>
+                                <p class="text-gray-600">Wiring & Planning</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-medium">Rating:</span>
+                            <div class="star-rating inline-block">
+                                ★★★★½ <span class="text-gray-700">(4.7/5)</span>
+                            </div>
+                        </div>
+                        <p class="mb-2"><span class="font-medium">Experience:</span> 18 years</p>
+                        <p class="mb-2"><span class="font-medium">Availability:</span> <span
+                                class="px-2 py-1 rounded-full text-sm availability-available">Available Today</span></p>
+                        <p class="font-medium mb-4">Cost: $65/hour</p>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire
+                            Now</button>
+                    </div>
+
+                    <!-- Worker 6 -->
+                    <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="installation">
+                        <div class="flex items-center mb-4">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ea5580c7-413f-4714-a499-b8788a4b61c0.png"
+                                alt="Skilled electrician installing smart home devices, holding a tablet with wiring diagram in modern living room"
+                                class="w-16 h-16 rounded-full mr-4" />
+                            <div>
+                                <h3 class="text-xl font-medium">Sarah Lee</h3>
+                                <p class="text-gray-600">Smart Home Installations</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <span class="font-medium">Rating:</span>
+                            <div class="star-rating inline-block">
+                                ★★★★★ <span class="text-gray-700">(4.9/5)</span>
+                            </div>
+                        </div>
+                        <p class="mb-2"><span class="font-medium">Experience:</span> 11 years</p>
+                        <p class="mb-2"><span class="font-medium">Availability:</span> <span
+                                class="px-2 py-1 rounded-full text-sm availability-unavailable">Unavailable Next
+                                Week</span></p>
+                        <p class="font-medium mb-4">Cost: $70/hour</p>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire
+                            Now</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-gray-800 text-white p-4 mt-8">
+            <div class="container mx-auto text-center">
+                <p>© 2023 Electrician Services. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script>
+            // Filter by category
+            document.getElementById('filter-toggle').addEventListener('click', function () {
+                const filter = prompt("Enter category to filter: wiring, installation, repairs, maintenance");
+                const cards = document.querySelectorAll('.worker-card');
+                cards.forEach(card => {
+                    if (filter && card.dataset.category !== filter) {
+                        card.style.display = 'none';
+                    } else {
+                        card.style.display = 'block';
+                    }
+                });
+            });
+
+            // Category click to filter
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', function () {
+                    const category = this.dataset.category;
+                    const workerCards = document.querySelectorAll('.worker-card');
+                    workerCards.forEach(wcard => {
+                        if (wcard.dataset.category === category) {
+                            wcard.style.display = 'block';
+                        } else {
+                            wcard.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+
+</html>
+</content>
+</create_file>

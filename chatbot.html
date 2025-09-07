@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kaamwale AI Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 95vh;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .ai-avatar {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .header-info h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+
+    .header-info p {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+
+    .chat-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8f9fa;
+    }
+
+    .quick-actions {
+      padding: 1rem 2rem;
+      background: white;
+      border-bottom: 1px solid #e9ecef;
+    }
+
+    .quick-actions h3 {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #495057;
+    }
+
+    .action-btn:hover {
+      background: #4a6cf7;
+      color: white;
+      border-color: #4a6cf7;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 80%;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .message.user .message-avatar {
+      background: linear-gradient(135deg, #4a6cf7, #3b5be3);
+      color: white;
+    }
+
+    .message.bot .message-avatar {
+      background: linear-gradient(135deg, #28a745, #20c997);
+      color: white;
+    }
+
+    .message-content {
+      background: white;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .message.user .message-content {
+      background: #4a6cf7;
+      color: white;
+    }
+
+    .message-time {
+      font-size: 0.7rem;
+      color: #6c757d;
+      margin-top: 0.25rem;
+      text-align: right;
+    }
+
+    .message.user .message-time {
+      text-align: left;
+    }
+
+    .input-container {
+      padding: 1rem 2rem;
+      background: white;
+      border-top: 1px solid #e9ecef;
+    }
+
+    .input-wrapper {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-end;
+    }
+
+    .input-field {
+      flex: 1;
+      min-height: 44px;
+      max-height: 120px;
+      padding: 0.75rem 1rem;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      resize: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: #4a6cf7;
+    }
+
+    .send-btn {
+      background: linear-gradient(135deg, #4a6cf7, #3b5be3);
+      color: white;
+      border: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+
+    .send-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(74, 108, 247, 0.4);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .typing-indicator {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: #6c757d;
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-dot:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0%, 60%, 100% {
+        transform: translateY(0);
+      }
+      30% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        height: 100vh;
+        border-radius: 0;
+        margin: 0;
+      }
+
+      body {
+        padding: 0;
+      }
+
+      .header {
+        padding: 1rem;
+      }
+
+      .messages {
+        padding: 1rem;
+      }
+
+      .input-container {
+        padding: 1rem;
+      }
+
+      .message {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <div class="ai-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="header-info">
+          <h1>Kaamwale AI Assistant</h1>
+          <p>How can I help you today?</p>
+        </div>
+      </div>
+      <button class="back-btn" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+      </button>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="action-buttons">
+          <button class="action-btn" onclick="sendQuickMessage('Book a plumber')">Book Plumber</button>
+          <button class="action-btn" onclick="sendQuickMessage('Find electrician near me')">Find Electrician</button>
+          <button class="action-btn" onclick="sendQuickMessage('House cleaning service')">House Cleaning</button>
+          <button class="action-btn" onclick="sendQuickMessage('Carpenter for furniture repair')">Carpenter Service</button>
+          <button class="action-btn" onclick="sendQuickMessage('AC repair service')">AC Repair</button>
+          <button class="action-btn" onclick="sendQuickMessage('What are your service charges?')">Service Charges</button>
+        </div>
+      </div>
+
+      <!-- Messages Area -->
+      <div class="messages" id="messages">
+        <div class="message bot">
+          <div class="message-avatar">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div class="message-content">
+            <div>Hello! I'm your Kaamwale AI Assistant. I can help you with:</div>
+            <div style="margin-top: 0.5rem;">• Finding and booking home services</div>
+            <div>• Getting service quotes and pricing</div>
+            <div>• Connecting with verified professionals</div>
+            <div>• Answering questions about our services</div>
+            <div style="margin-top: 0.5rem;">What would you like to know?</div>
+            <div class="message-time">Just now</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Typing Indicator -->
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="message-avatar">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div>
+          <span style="font-size: 0.8rem; color: #6c757d;">AI is typing</span>
+          <div class="typing-dots">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Container -->
+      <div class="input-container">
+        <div class="input-wrapper">
+          <textarea 
+            class="input-field" 
+            id="messageInput" 
+            placeholder="Type your message here..."
+            rows="1"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.getElementById('messages');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    // Auto-resize textarea
+    messageInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+
+    // Send message on Enter (but allow Shift+Enter for new line)
+    messageInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    function sendQuickMessage(message) {
+      messageInput.value = message;
+      sendMessage();
+    }
+
+    function sendMessage() {
+      const message = messageInput.value.trim();
+      if (!message) return;
+
+      // Add user message
+      addMessage(message, 'user');
+      messageInput.value = '';
+      messageInput.style.height = 'auto';
+
+      // Show typing indicator
+      showTypingIndicator();
+
+      // Simulate AI response
+      setTimeout(() => {
+        hideTypingIndicator();
+        const response = generateAIResponse(message);
+        addMessage(response, 'bot');
+      }, 1500 + Math.random() * 1000);
+    }
+
+    function addMessage(content, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+      
+      const messageContent = document.createElement('div');
+      messageContent.className = 'message-content';
+      messageContent.innerHTML = content + `<div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>`;
+      
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(messageContent);
+      messages.appendChild(messageDiv);
+      
+      // Scroll to bottom
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+      typingIndicator.style.display = 'flex';
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      typingIndicator.style.display = 'none';
+    }
+
+    function generateAIResponse(userMessage) {
+      const message = userMessage.toLowerCase();
+      
+      if (message.includes('plumber') || message.includes('plumbing')) {
+        return `I can help you find a qualified plumber! Here's what I can do:
+
+• Connect you with verified plumbers in your area
+• Get quotes for your plumbing needs
+• Schedule same-day or next-day service
+• Handle emergency plumbing issues
+
+Would you like me to find plumbers near your location? Please share your area or use the location feature.`;
+      }
+      
+      if (message.includes('electrician') || message.includes('electrical')) {
+        return `Great! I can help you find a certified electrician. Our electrical services include:
+
+• Wiring and rewiring
+• Switch and socket installation
+• Ceiling fan installation
+• Electrical troubleshooting
+• Safety inspections
+
+All our electricians are verified and experienced. Would you like me to show available electricians in your area?`;
+      }
+      
+      if (message.includes('cleaning') || message.includes('cleaner')) {
+        return `Perfect! Our house cleaning services are very popular. We offer:
+
+• Regular house cleaning (daily/weekly/monthly)
+• Deep cleaning services
+• Post-construction cleaning
+• Move-in/move-out cleaning
+• Sofa and carpet cleaning
+
+Our cleaners are trained, verified, and bring their own supplies. What type of cleaning service do you need?`;
+      }
+      
+      if (message.includes('carpenter') || message.includes('furniture')) {
+        return `I can connect you with skilled carpenters! Our carpentry services include:
+
+• Furniture repair and restoration
+• Custom furniture making
+• Door and window installation
+• Kitchen cabinet work
+• Wooden flooring
+
+All carpenters are experienced and use quality materials. What carpentry work do you need done?`;
+      }
+      
+      if (message.includes('ac') || message.includes('air condition')) {
+        return `I can help with AC services! We provide:
+
+• AC installation and uninstallation
+• AC repair and maintenance
+• Gas filling and leak fixing
+• Cleaning and servicing
+• Emergency AC repairs
+
+Our technicians work with all AC brands. Is this for repair, installation, or maintenance?`;
+      }
+      
+      if (message.includes('price') || message.includes('cost') || message.includes('charge')) {
+        return `Our pricing is transparent and competitive:
+
+• Service charges start from ₹99
+• Free quotes and estimates
+• No hidden costs
+• Pay after service completion
+• Multiple payment options available
+
+Prices vary by service type and location. Would you like a specific quote for any service?`;
+      }
+      
+      if (message.includes('book') || message.includes('schedule')) {
+        return `Booking is easy! Here's how:
+
+1. Tell me what service you need
+2. Share your location
+3. Choose your preferred time
+4. I'll connect you with verified professionals
+5. Get instant quotes
+
+You can also visit our Services page or call our support team. What service would you like to book?`;
+      }
+      
+      if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+        return `Hello! Welcome to Kaamwale! 👋
+
+I'm here to help you with all your home service needs. Whether you need:
+• Plumbing or electrical work
+• House cleaning services
+• Carpentry or repairs
+• Appliance installation
+
+Just let me know what you're looking for, and I'll connect you with the right professionals in your area!`;
+      }
+      
+      // Default response
+      return `Thank you for your message! I'm here to help with all Kaamwale services:
+
+🔧 Plumbing & Electrical
+🧹 House Cleaning
+🔨 Carpentry & Repairs
+📱 Appliance Services
+🎨 Painting Services
+
+Could you please tell me more about what specific service you're looking for? I'll be happy to assist you with booking, pricing, or any other questions!`;
+    }
+  </script>
+</body>
+</html>
+

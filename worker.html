@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kaamwale - Professional Workers</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+                background-color: #f5f7f9;
+                color: #333;
+                line-height: 1.6;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            header {
+                text-align: center;
+                margin-bottom: 40px;
+            }
+
+            h1 {
+                color: #2c3e50;
+                margin-bottom: 15px;
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                color: #7f8c8d;
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+
+            .category-filter {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-bottom: 40px;
+            }
+
+            .category-btn {
+                padding: 12px 25px;
+                background: white;
+                border: 2px solid #e7e7e7;
+                border-radius: 50px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .category-btn:hover {
+                border-color: #4a6cf7;
+                color: #4a6cf7;
+            }
+
+            .category-btn.active {
+                background: #4a6cf7;
+                color: white;
+                border-color: #4a6cf7;
+            }
+
+            .worker-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 25px;
+            }
+
+            .worker-card {
+                background: white;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+                transition: transform 0.3s, box-shadow 0.3s;
+                position: relative;
+            }
+
+            .worker-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            }
+
+            .card-header {
+                padding: 20px 20px 15px;
+                border-bottom: 1px solid #f1f1f1;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+
+            .availability {
+                font-size: 14px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            .availability.available {
+                color: #28a745;
+            }
+
+            .availability.busy {
+                color: #ff9800;
+            }
+
+            .availability.not-available {
+                color: #dc3545;
+            }
+
+            .availability.away {
+                color: #6c757d;
+            }
+
+            .availability::before {
+                content: "";
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+
+            .availability.available::before {
+                background: #28a745;
+            }
+
+            .availability.busy::before {
+                background: #ff9800;
+            }
+
+            .availability.not-available::before {
+                background: #dc3545;
+            }
+
+            .availability.away::before {
+                background: #6c757d;
+            }
+
+            .favorite {
+                color: #ddd;
+                font-size: 20px;
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+
+            .favorite:hover,
+            .favorite.active {
+                color: #ff4d4d;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+
+            .worker-info {
+                display: flex;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .worker-img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid #f1f1f1;
+            }
+
+            .worker-details {
+                flex: 1;
+            }
+
+            .worker-name {
+                font-weight: 700;
+                font-size: 18px;
+                color: #2c3e50;
+                margin-bottom: 5px;
+            }
+
+            .worker-profession {
+                color: #4a6cf7;
+                font-weight: 600;
+                margin-bottom: 8px;
+                font-size: 15px;
+            }
+
+            .worker-experience {
+                font-size: 14px;
+                color: #7f8c8d;
+            }
+
+            .worker-rating {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                margin-top: 5px;
+                color: #ff9800;
+                font-weight: 500;
+            }
+
+            .card-footer {
+                padding: 0 20px 20px;
+                display: flex;
+                gap: 12px;
+            }
+
+            .card-btn {
+                flex: 1;
+                padding: 12px;
+                text-align: center;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+                text-decoration: none;
+            }
+
+            .view-profile {
+                background: #4a6cf7;
+                color: white;
+                border: 1px solid #4a6cf7;
+            }
+
+            .view-profile:hover {
+                background: #3b5be3;
+            }
+
+            .contact {
+                background: transparent;
+                color: #4a6cf7;
+                border: 1px solid #4a6cf7;
+            }
+
+            .contact:hover {
+                background: #f0f3ff;
+            }
+
+            .contact:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .contact:disabled:hover {
+                background: transparent;
+            }
+
+            .not-available-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.9);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+
+            .worker-card.not-available:hover .not-available-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .not-available-text {
+                font-size: 18px;
+                font-weight: 600;
+                color: #dc3545;
+            }
+
+            .notify-btn {
+                padding: 10px 20px;
+                background: #4a6cf7;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .notify-btn:hover {
+                background: #3b5be3;
+            }
+
+            @media (max-width: 768px) {
+                .worker-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .category-filter {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .category-btn {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+
+            .worker-category {
+                display: none;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f8f9fa;
+            }
+
+            /* Navigation Bar */
+            .navbar {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 70px;
+            }
+
+            /* Logo */
+            .nav-logo .logo-link {
+                text-decoration: none;
+            }
+
+            .logo-text {
+                font-size: 28px;
+                font-weight: bold;
+                color: #fff;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+
+            /* Navigation Menu */
+            .nav-menu {
+                display: flex;
+                list-style: none;
+                gap: 30px;
+            }
+
+            .nav-item {
+                position: relative;
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                font-weight: 500;
+            }
+
+            .nav-link:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
+
+            .nav-link.active {
+                background-color: rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-link i {
+                font-size: 16px;
+            }
+
+            /* Auth Buttons */
+            .nav-auth {
+                display: flex;
+                gap: 15px;
+            }
+
+            .auth-btn {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+
+            .login-btn {
+                color: #fff;
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+            .login-btn:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.5);
+                transform: translateY(-2px);
+            }
+
+            .register-btn {
+                background-color: #fff;
+                color: #667eea;
+                border-color: #fff;
+            }
+
+            .register-btn:hover {
+                background-color: #f8f9fa;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+        </style>
+    </head>
+
+    <body>
+
+         <nav class="navbar">
+                    <div class="nav-container">
+                        <!-- Logo -->
+                        <div class="nav-logo">
+                            <a href="#" class="logo-link">
+                                <span class="logo-text">Kaamwale</span>
+                            </a>
+                        </div>
+
+                        <!-- Navigation Menu -->
+                        <ul class="nav-menu">
+                            <li class="nav-item">
+                                <a href="index.html" class="nav-link active">
+                                    <i class="fas fa-home"></i>
+                                    <span>Home</span>
+                                </a>
+                            </li>
+                           
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-hard-hat"></i>
+                                    <span>Workers</span>
+                                </a>
+                            </li>
+                            <!-- New Service Item -->
+                            <li class="nav-item">
+                                <a href="service.html" class="nav-link">
+                                    <i class="fas fa-concierge-bell"></i>
+                                    <span>Services</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-question-circle"></i>
+                                    <span>Help</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Auth Buttons -->
+                       
+
+                        <!-- Mobile Menu Toggle -->
+                        <div class="hamburger">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                </nav>
+        <div class="container">
+            <header>
+               
+
+                <h1>Skilled Professionals</h1>
+                <p class="subtitle">Find the right professional for your needs</p>
+            </header>
+
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">
+                    <i class="fas fa-th-large"></i> All Categories
+                </button>
+                <button class="category-btn" data-category="electrician">
+                    <i class="fas fa-bolt"></i> Electricians
+                </button>
+                <button class="category-btn" data-category="plumber">
+                    <i class="fas fa-faucet"></i> Plumbers
+                </button>
+                <button class="category-btn" data-category="carpenter">
+                    <i class="fas fa-hammer"></i> Carpenters
+                </button>
+                <button class="category-btn" data-category="painter">
+                    <i class="fas fa-paint-roller"></i> Painters
+                </button>
+            </div>
+
+            <div class="worker-grid">
+                <!-- Workers will be dynamically loaded here -->
+                <div class="worker-card" data-category="electrician">
+                    <div class="card-header">
+                        <div class="availability available">Available</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Smith"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">John Smith</h3>
+                                <div class="worker-profession">Electrician</div>
+                                <div class="worker-experience">8 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.5 (128 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <a href="#" class="card-btn contact">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Electrician 2 - Not Available -->
+                <div class="worker-card not-available" data-category="electrician">
+                    <div class="card-header">
+                        <div class="availability not-available">Not Available</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Robert Johnson"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">Robert Johnson</h3>
+                                <div class="worker-profession">Electrician</div>
+                                <div class="worker-experience">5 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.7 (92 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <button class="card-btn contact" disabled>Contact</button>
+                    </div>
+                    <div class="not-available-overlay">
+                        <div class="not-available-text">Currently Not Available</div>
+                        <button class="notify-btn">Notify When Available</button>
+                    </div>
+                </div>
+
+                <!-- Plumber 1 - Busy -->
+                <div class="worker-card" data-category="plumber">
+                    <div class="card-header">
+                        <div class="availability busy">Busy</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Michael Brown"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">Michael Brown</h3>
+                                <div class="worker-profession">Plumber</div>
+                                <div class="worker-experience">10 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8 (156 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <button class="card-btn contact" disabled>Contact</button>
+                    </div>
+                </div>
+
+                <!-- Plumber 2 - Available -->
+                <div class="worker-card" data-category="plumber">
+                    <div class="card-header">
+                        <div class="availability available">Available</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Williams"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">Sarah Williams</h3>
+                                <div class="worker-profession">Plumber</div>
+                                <div class="worker-experience">6 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.6 (78 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <a href="#" class="card-btn contact">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Carpenter 1 - Away -->
+                <div class="worker-card" data-category="carpenter">
+                    <div class="card-header">
+                        <div class="availability away">Away</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="James Davis"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">James Davis</h3>
+                                <div class="worker-profession">Carpenter</div>
+                                <div class="worker-experience">12 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.9 (203 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <button class="card-btn contact" disabled>Contact</button>
+                    </div>
+                </div>
+
+                <!-- Painter 1 - Available -->
+                <div class="worker-card" data-category="painter">
+                    <div class="card-header">
+                        <div class="availability available">Available</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Emily Wilson"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">Emily Wilson</h3>
+                                <div class="worker-profession">Painter</div>
+                                <div class="worker-experience">7 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.4 (115 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <a href="#" class="card-btn contact">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Painter 2 - Not Available -->
+                <div class="worker-card not-available" data-category="painter">
+                    <div class="card-header">
+                        <div class="availability not-available">Not Available</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/men/53.jpg" alt="David Miller"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">David Miller</h3>
+                                <div class="worker-profession">Painter</div>
+                                <div class="worker-experience">9 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.3 (87 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <button class="card-btn contact" disabled>Contact</button>
+                    </div>
+                    <div class="not-available-overlay">
+                        <div class="not-available-text">Currently Not Available</div>
+                        <button class="notify-btn">Notify When Available</button>
+                    </div>
+                </div>
+
+                <!-- Electrician 3 - Busy -->
+                <div class="worker-card" data-category="electrician">
+                    <div class="card-header">
+                        <div class="availability busy">Busy</div>
+                        <div class="favorite"><i class="far fa-heart"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="worker-info">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Jessica Taylor"
+                                class="worker-img">
+                            <div class="worker-details">
+                                <h3 class="worker-name">Jessica Taylor</h3>
+                                <div class="worker-profession">Electrician</div>
+                                <div class="worker-experience">4 years experience</div>
+                                <div class="worker-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.2 (64 reviews)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#" class="card-btn view-profile">View Profile</a>
+                        <button class="card-btn contact" disabled>Contact</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-btn view-profile">View Profile</a>
+        <button class="card-btn contact" disabled>Contact</button>
+    </div>
+    <div class="not-available-overlay">
+        <div class="not-available-text">Currently Not Available</div>
+        <button class="notify-btn">Notify When Available</button>
+    </div>
+</div>
+
+<!-- Plumber 1 - Busy -->
+<div class="worker-card" data-category="plumber">
+    <div class="card-header">
+        <div class="availability busy">Busy</div>
+        <div class="favorite"><i class="far fa-heart"></i></div>
+    </div>
+    <div class="card-body">
+        <div class="worker-info">
+            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Michael Brown"
+                class="worker-img">
+            <div class="worker-details">
+                <h3 class="worker-name">Michael Brown</h3>
+                <div class="worker-profession">Plumber</div>
+                <div class="worker-experience">10 years experience</div>
+                <div class="worker-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.8 (156 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-btn view-profile">View Profile</a>
+        <button class="card-btn contact" disabled>Contact</button>
+    </div>
+</div>
+
+<!-- Plumber 2 - Available -->
+<div class="worker-card" data-category="plumber">
+    <div class="card-header">
+        <div class="availability available">Available</div>
+        <div class="favorite"><i class="far fa-heart"></i></div>
+    </div>
+    <div class="card-body">
+        <div class="worker-info">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Sarah Williams"
+                class="worker-img">
+            <div class="worker-details">
+                <h3 class="worker-name">Sarah Williams</h3>
+                <div class="worker-profession">Plumber</div>
+                <div class="worker-experience">6 years experience</div>
+                <div class="worker-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.6 (78 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-btn view-profile">View Profile</a>
+        <a href="#" class="card-btn contact">Contact</a>
+    </div>
+</div>
+
+<!-- Carpenter 1 - Away -->
+<div class="worker-card" data-category="carpenter">
+    <div class="card-header">
+        <div class="availability away">Away</div>
+        <div class="favorite"><i class="far fa-heart"></i></div>
+    </div>
+    <div class="card-body">
+        <div class="worker-info">
+            <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="James Davis"
+                class="worker-img">
+            <div class="worker-details">
+                <h3 class="worker-name">James Davis</h3>
+                <div class="worker-profession">Carpenter</div>
+                <div class="worker-experience">12 years experience</div>
+                <div class="worker-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.9 (203 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-btn view-profile">View Profile</a>
+        <button class="card-btn contact" disabled>Contact</button>
+    </div>
+</div>
+
+<!-- Painter 1 - Available -->
+<div class="worker-card" data-category="painter">
+    <div class="card-header">
+        <div class="availability available">Available</div>
+        <div class="favorite"><i class="far fa-heart"></i></div>
+    </div>
+    <div class="card-body">
+        <div class="worker-info">
+            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Emily Wilson"
+                class="worker-img">
+            <div class="worker-details">
+                <h3 class="worker-name">Emily Wilson</h3>
+                <div class="worker-profession">Painter</div>
+                <div class="worker-experience">7 years experience</div>
+                <div class="worker-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.4 (115 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-btn view-profile">View Profile</a>
+        <a href="#" class="card-btn contact">Contact</a>
+    </div>
+</div>
+
+<!-- Painter 2 - Not Available -->
+<div class="worker-card not-available" data-category="painter">
+    <div class="card-header">
+        <div class="availability not-available">Not Available</div>
+        <div class="favorite"><i class="far fa-heart"></i></div>
+    </div>
+    <div class="card-body">
+        <div class="worker-info">
+            <img src="https://randomuser.me/api/portraits/men/53.jpg" alt="David Miller"
+                class="worker-img">
+            <div class="worker-details">
+                <h3 class="worker-name">David Miller</h3>
+                <div class="worker-profession">Painter</div>
+                <div class="worker-experience">9 years experience</div>
+                <div class="worker-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.3 (87 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-btn view-profile">View Profile</a>
+        <button class="card-btn contact" disabled>Contact</button>
+    </div>
+    <div class="not-available-overlay">
+        <div class="not-available-text">Currently Not Available</div>
+        <button class="notify-btn">Notify When Available</button>
+    </div>
+</div>
+
+<!-- Electrician 3 - Busy -->
+<div class="worker-card" data-category="electrician">
+    <div class="card-header">
+        <div class="availability busy">Busy</div>
+        <div class="favorite"><i class="far fa-heart"></i></div>
+    </div>
+    <div class="card-body">
+        <div class="worker-info">
+            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Jessica Taylor"
+                class="worker-img">
+            <div class="worker-details">
+                <h3 class="worker-name">Jessica Taylor</h3>
+                <div class="worker-profession">Electrician</div>
+                <div class="worker-experience">4 years experience</div>
+                <div class="worker-rating">
+                    <i class="fas fa-star"></i>
+                    <span>4.2 (64 reviews)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="#" class="card-btn view-profile">View Profile</a>
+        <button class="card-btn contact" disabled>Contact</button>
+    </div>
+</div>
+</div>
+</div>
+
+<!-- Enhanced Worker Modal -->
+<div id="workerModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Worker Details</h3>
+            <span id="closeModal" class="close-btn">&times;</span>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const categoryButtons = document.querySelectorAll('.category-btn');
+                const workerCards = document.querySelectorAll('.worker-card');
+
+                categoryButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        categoryButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+
+                        const category = this.getAttribute('data-category');
+                        workerCards.forEach(card => {
+                            if (category === 'all' || card.getAttribute('data-category') === category) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+
+                const favoriteIcons = document.querySelectorAll('.favorite');
+                favoriteIcons.forEach(icon => {
+                    icon.addEventListener('click', function () {
+                        this.classList.toggle('active');
+                        const heartIcon = this.querySelector('i');
+                        if (this.classList.contains('active')) {
+                            heartIcon.classList.remove('far');
+                            heartIcon.classList.add('fas');
+                        } else {
+                            heartIcon.classList.remove('fas');
+                            heartIcon.classList.add('far');
+                        }
+                    });
+                });
+
+                const notifyButtons = document.querySelectorAll('.notify-btn');
+                notifyButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        alert('You will be notified when this professional becomes available!');
+                    });
+                });
+
+                const modal = document.getElementById('workerModal');
+                const modalContent = document.getElementById('modalContent');
+                const closeModal = document.getElementById('closeModal');
+
+                function showModal(html) {
+                    modalContent.innerHTML = html;
+                    modal.style.display = 'flex';
+
+                    const favBtn = modalContent.querySelector('.modal-favorite');
+                    if (favBtn) {
+                        favBtn.addEventListener('click', function () {
+                            favBtn.classList.toggle('active');
+                            const heartIcon = favBtn.querySelector('i');
+                            if (favBtn.classList.contains('active')) {
+                                heartIcon.classList.remove('far');
+                                heartIcon.classList.add('fas');
+                            } else {
+                                heartIcon.classList.remove('fas');
+                                heartIcon.classList.add('far');
+                            }
+                        });
+                    }
+                }
+                closeModal.onclick = () => { modal.style.display = 'none'; };
+                window.onclick = (e) => { if (e.target === modal) modal.style.display = 'none'; };
+
+                document.querySelectorAll('.view-profile').forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const card = this.closest('.worker-card');
+                        const name = card.querySelector('.worker-name').textContent;
+                        const rating = card.querySelector('.worker-rating span').textContent;
+                        const experience = card.querySelector('.worker-experience').textContent;
+                        const category = card.querySelector('.worker-profession').textContent;
+                        const availability = card.querySelector('.availability').textContent;
+                        const imgSrc = card.querySelector('.worker-img').src;
+                        const isFav = card.querySelector('.favorite').classList.contains('active');
+                        showModal(` 
+                <div class="worker-profile">
+                    <img src="${imgSrc}" alt="${name}">
+                    <h2>${name}</h2>
+                    <div class="profession">${category}</div>
+                    <button class="modal-favorite${isFav ? ' active' : ''}" style="background:none;border:none;cursor:pointer;font-size:22px;margin-bottom:16px;">
+                        <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+                    </button>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <span class="stat-value">4.8</span>
+                            <span class="stat-label">Rating</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">156</span>
+                            <span class="stat-label">Reviews</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-value">${experience.split(' ')[0]}</span>
+                            <span class="stat-label">Years Exp</span>
+                        </div>
+                    </div>
+                    
+                    <div class="reviews-section">
+                        <h4>Recent Reviews</h4>
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="reviewer-name">Amit Sharma</span>
+                                <span class="review-rating">★★★★★</span>
+                            </div>
+                            <div class="review-text">Excellent work! Very professional and completed the job on time.</div>
+                        </div>
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="reviewer-name">Priya Patel</span>
+                                <span class="review-rating">★★★★☆</span>
+                            </div>
+                            <div class="review-text">Good service, reasonable pricing. Would recommend.</div>
+                        </div>
+                    </div>
+                </div>
+            `);
+                    });
+                });
+
+                document.querySelectorAll('.contact:not([disabled])').forEach(btn => {
+                    btn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const card = this.closest('.worker-card');
+                        const name = card.querySelector('.worker-name').textContent;
+                        const imgSrc = card.querySelector('.worker-img').src;
+                        const isFav = card.querySelector('.favorite').classList.contains('active');
+                        showModal(` 
+                <div class="worker-profile">
+                    <img src="${imgSrc}" alt="${name}">
+                    <h2>Contact ${name}</h2>
+                    <div class="profession">${card.querySelector('.worker-profession').textContent}</div>
+                    <button class="modal-favorite${isFav ? ' active' : ''}" style="background:none;border:none;cursor:pointer;font-size:22px;margin-bottom:16px;">
+                        <i class="${isFav ? 'fas' : 'far'} fa-heart"></i>
+                    </button>
+                    
+                    <div style="text-align:left;margin:20px 0;">
+                        <div style="margin-bottom:12px;"><strong>Phone:</strong> +91-9876543210</div>
+                        <div style="margin-bottom:20px;"><strong>Email:</strong> ${name.toLowerCase().replace(/ /g, ".")}@kaamwale.com</div>
+                        
+                        <button id="bookServiceBtn" class="btn-primary" style="width:100%;margin-bottom:16px;padding:12px;border:none;border-radius:8px;background:#4a6cf7;color:white;font-weight:600;cursor:pointer;">
+                            Book Service Now
+                        </button>
+                        
+                        <div>
+                            <label for="userProblem" style="font-weight:600;display:block;margin-bottom:8px;">Quick Message:</label>
+                            <textarea id="userProblem" rows="3" style="width:100%;padding:12px;border:2px solid #e9ecef;border-radius:8px;font-family:inherit;"></textarea>
+                            <button id="sendChatBtn" style="margin-top:12px;background:#28a745;color:#fff;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;font-weight:600;">Send Message</button>
+                            <div id="chatStatus" style="margin-top:8px;color:#4a6cf7;font-size:14px;"></div>
+                        </div>
+                    </div>
+                </div>
+            `);
+
+                        const bookBtn = document.getElementById('bookServiceBtn');
+                        if (bookBtn) {
+                            bookBtn.onclick = function () {
+                                openBookingModal(name, card.querySelector('.worker-profession').textContent);
+                            };
+                        }
+
+                        const sendChatBtn = document.getElementById('sendChatBtn');
+                        const userProblem = document.getElementById('userProblem');
+                        const chatStatus = document.getElementById('chatStatus');
+                        if (sendChatBtn) {
+                            sendChatBtn.onclick = function () {
+                                if (userProblem.value.trim() === "") {
+                                    chatStatus.textContent = "Please describe your problem.";
+                                    chatStatus.style.color = "#dc3545";
+                                } else {
+                                    chatStatus.textContent = "Your message has been sent to the worker!";
+                                    chatStatus.style.color = "#28a745";
+                                    userProblem.value = "";
+                                }
+                            };
+                        }
+                    });
+                });
+
+                function openBookingModal(workerName, profession) {
+                    const bookingModal = document.getElementById('bookingModal');
+                    document.getElementById('selectedWorker').textContent = workerName;
+                    
+                    const today = new Date().toISOString().split('T')[0];
+                    document.getElementById('serviceDate').min = today;
+                    
+                    bookingModal.classList.add('show');
+                    bookingModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+
+                function closeBookingModal() {
+                    const bookingModal = document.getElementById('bookingModal');
+                    bookingModal.classList.remove('show');
+                    bookingModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    document.getElementById('bookingForm').reset();
+                }
+
+                document.getElementById('bookingForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const bookingData = {
+                        worker: document.getElementById('selectedWorker').textContent,
+                        date: formData.get('serviceDate'),
+                        time: formData.get('serviceTime'),
+                        description: formData.get('serviceDescription'),
+                        customerName: formData.get('customerName'),
+                        customerPhone: formData.get('customerPhone'),
+                        customerAddress: formData.get('customerAddress')
+                    };
+                    
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Processing...';
+                    
+                    setTimeout(() => {
+                        alert('Booking confirmed! You will receive a confirmation call within 30 minutes.');
+                        closeBookingModal();
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Confirm Booking';
+                    }, 2000);
+                });
+
+                window.addEventListener('click', function(e) {
+                    const workerModal = document.getElementById('workerModal');
+                    const bookingModal = document.getElementById('bookingModal');
+                    
+                    if (e.target === workerModal) {
+                        workerModal.style.display = 'none';
+                    }
+                    if (e.target === bookingModal) {
+                        closeBookingModal();
+                    }
+                            });
+            });
+        </script>
+    </body>
+</html>

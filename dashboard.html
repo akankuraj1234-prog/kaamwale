@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaamwale - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo h1 {
+            color: #4a6cf7;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notifications {
+            position: relative;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .notifications:hover {
+            background: #f8f9fa;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .user-profile:hover {
+            background: #f8f9fa;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a6cf7, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .user-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .user-info p {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .dashboard-header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-card.bookings {
+            border-left-color: #4a6cf7;
+        }
+
+        .stat-card.completed {
+            border-left-color: #28a745;
+        }
+
+        .stat-card.pending {
+            border-left-color: #ffc107;
+        }
+
+        .stat-card.earnings {
+            border-left-color: #17a2b8;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-card.bookings .stat-icon {
+            background: #4a6cf7;
+        }
+
+        .stat-card.completed .stat-icon {
+            background: #28a745;
+        }
+
+        .stat-card.pending .stat-icon {
+            background: #ffc107;
+        }
+
+        .stat-card.earnings .stat-icon {
+            background: #17a2b8;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .dashboard-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h3 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+
+        .view-all-btn {
+            color: #4a6cf7;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .view-all-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Recent Bookings */
+        .booking-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f8f9fa;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .booking-item:last-child {
+            border-bottom: none;
+        }
+
+        .booking-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+            color: #2c3e50;
+        }
+
+        .booking-info p {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        .booking-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-completed {
+            background: #cce7ff;
+            color: #004085;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            padding: 1.5rem;
+        }
+
+        .action-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #4a6cf7;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: #3b5be3;
+            transform: translateY(-1px);
+        }
+
+        .action-btn.secondary {
+            background: #6c757d;
+        }
+
+        .action-btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        .action-btn i {
+            margin-right: 8px;
+        }
+
+        /* Profile Summary */
+        .profile-summary {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a6cf7, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0 auto 1rem;
+        }
+
+        .profile-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+        }
+
+        .rating-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-info {
+                display: none;
+            }
+        }
+
+        /* Logout Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #4a6cf7;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>Kaamwale</h1>
+            </div>
+            
+            <div class="user-menu">
+                <div class="notifications" onclick="showNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+                
+                <div class="user-profile" onclick="toggleUserMenu()">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div class="user-info">
+                        <h4 id="userName">John Doe</h4>
+                        <p id="userType">Customer</p>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="dashboard-header">
+            <h2 id="welcomeMessage">Welcome back, John!</h2>
+            <p>Here's what's happening with your services today.</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card bookings">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalBookings">12</div>
+                <div class="stat-label">Total Bookings</div>
+            </div>
+
+            <div class="stat-card completed">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="completedServices">8</div>
+                <div class="stat-label">Completed Services</div>
+            </div>
+
+            <div class="stat-card pending">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="pendingServices">4</div>
+                <div class="stat-label">Pending Services</div>
+            </div>
+
+            <div class="stat-card earnings">
+                <div class="stat-header">
+                    <div class="stat-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                </div>
+                <div class="stat-value" id="totalEarnings">₹15,240</div>
+                <div class="stat-label">Total Spent</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Recent Bookings -->
+            <div class="dashboard-section">
+                <div class="section-header">
+                    <h3>Recent Bookings</h3>
+                    <a href="worker.html" class="view-all-btn">View All</a>
+                </div>
+                
+                <div class="booking-item">
+                    <div class="booking-info">
+                        <h4>Electrical Repair - John Doe</h4>
+                        <p>Tomorrow, 10:00 AM • ₹800</p>
+                    </div>
+                    <span class="booking-status status-confirmed">Confirmed</span>
+                </div>
+                
+                <div class="booking-item">
+                    <div class="booking-info">
+                        <h4>Plumbing Service - Sarah Williams</h4>
+                        <p>Today, 2:00 PM • ₹1,200</p>
+                    </div>
+                    <span class="booking-status status-pending">Pending</span>
+                </div>
+                
+                <div class="booking-item">
+                    <div class="booking-info">
+                        <h4>Painting Work - Emily Wilson</h4>
+                        <p>Yesterday • ₹2,500</p>
+                    </div>
+                    <span class="booking-status status-completed">Completed</span>
+                </div>
+                
+                <div class="booking-item">
+                    <div class="booking-info">
+                        <h4>Carpentry - James Davis</h4>
+                        <p>Last week • ₹1,800</p>
+                    </div>
+                    <span class="booking-status status-completed">Completed</span>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div>
+                <!-- Quick Actions -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="quick-actions">
+                        <a href="worker.html" class="action-btn">
+                            <i class="fas fa-search"></i>
+                            Find Workers
+                        </a>
+                        <a href="#" class="action-btn secondary" onclick="showBookingHistory()">
+                            <i class="fas fa-history"></i>
+                            Booking History
+                        </a>
+                        <a href="#" class="action-btn secondary" onclick="showProfile()">
+                            <i class="fas fa-user-edit"></i>
+                            Edit Profile
+                        </a>
+                        <a href="#" class="action-btn secondary" onclick="showLogoutModal()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Profile Summary -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h3>Profile Summary</h3>
+                    </div>
+                    <div class="profile-summary">
+                        <div class="profile-avatar" id="profileAvatar">JD</div>
+                        <h4 id="profileName">John Doe</h4>
+                        <p id="profileEmail">john.doe@email.com</p>
+                        
+                        <div class="profile-rating">
+                            <div class="rating-stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-text">5.0 (12 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Logout Modal -->
+    <div class="modal" id="logoutModal">
+        <div class="modal-content">
+            <h3>Confirm Logout</h3>
+            <p>Are you sure you want to logout?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="hideLogoutModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load user data
+            loadUserData();
+            
+            // Check authentication
+            checkAuth();
+        });
+
+        function loadUserData() {
+            const userData = JSON.parse(localStorage.getItem('kaamwale_user') || sessionStorage.getItem('kaamwale_user') || '{}');
+            
+            if (userData.name) {
+                document.getElementById('userName').textContent = userData.name;
+                document.getElementById('profileName').textContent = userData.name;
+                document.getElementById('profileEmail').textContent = userData.email;
+                document.getElementById('welcomeMessage').textContent = `Welcome back, ${userData.name.split(' ')[0]}!`;
+                
+                // Set user type
+                const userType = userData.userType === 'worker' ? 'Service Provider' : 'Customer';
+                document.getElementById('userType').textContent = userType;
+                
+                // Set avatar initials
+                const initials = userData.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                document.getElementById('userAvatar').textContent = initials;
+                document.getElementById('profileAvatar').textContent = initials;
+                
+                // Update stats based on user type
+                if (userData.userType === 'worker') {
+                    updateWorkerStats();
+                } else {
+                    updateCustomerStats();
+                }
+            }
+        }
+
+        function updateWorkerStats() {
+            document.getElementById('totalBookings').textContent = '24';
+            document.getElementById('completedServices').textContent = '18';
+            document.getElementById('pendingServices').textContent = '6';
+            document.getElementById('totalEarnings').textContent = '₹45,680';
+            document.querySelector('.stat-card.earnings .stat-label').textContent = 'Total Earnings';
+        }
+
+        function updateCustomerStats() {
+            document.getElementById('totalBookings').textContent = '12';
+            document.getElementById('completedServices').textContent = '8';
+            document.getElementById('pendingServices').textContent = '4';
+            document.getElementById('totalEarnings').textContent = '₹15,240';
+            document.querySelector('.stat-card.earnings .stat-label').textContent = 'Total Spent';
+        }
+
+        function checkAuth() {
+            const userData = localStorage.getItem('kaamwale_user') || sessionStorage.getItem('kaamwale_user');
+            if (!userData) {
+                window.location.href = 'login.html';
+            }
+        }
+
+        function showNotifications() {
+            alert('Notifications:\n\n• Your booking with John Doe is confirmed for tomorrow\n• Sarah Williams accepted your service request\n• Payment received for completed service');
+        }
+
+        function toggleUserMenu() {
+            // This would typically show a dropdown menu
+            showLogoutModal();
+        }
+
+        function showBookingHistory() {
+            alert('Redirecting to booking history...');
+            // window.location.href = 'bookings.html';
+        }
+
+        function showProfile() {
+            alert('Redirecting to profile settings...');
+            // window.location.href = 'profile.html';
+        }
+
+        function showLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'flex';
+        }
+
+        function hideLogoutModal() {
+            document.getElementById('logoutModal').style.display = 'none';
+        }
+
+        function logout() {
+            localStorage.removeItem('kaamwale_user');
+            sessionStorage.removeItem('kaamwale_user');
+            window.location.href = 'login.html';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('logoutModal');
+            if (e.target === modal) {
+                hideLogoutModal();
+            }
+        });
+    </script>
+</body>
+</html>

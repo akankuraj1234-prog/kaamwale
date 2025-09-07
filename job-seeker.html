@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find Jobs - Kaamwale</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #667eea;
+    }
+
+    .help-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.3s;
+      text-decoration: none;
+    }
+
+    .help-btn:hover {
+      background: #5a6fd8;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-top: 80px;
+      padding: 40px 0;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    .page-subtitle {
+      font-size: 1.2rem;
+      color: #6c757d;
+    }
+
+    /* Job Posting Form */
+    .job-form-container {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 3rem;
+    }
+
+    .form-title {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+
+    input, select, textarea {
+      padding: 0.75rem;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Job Listings */
+    .job-listings {
+      margin-top: 3rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .job-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .job-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+
+    .job-budget {
+      background: #e8f5e8;
+      color: #28a745;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .job-location {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .job-description {
+      color: #495057;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .job-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    .job-urgency {
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .urgent {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    .normal {
+      background: #d1ecf1;
+      color: #0c5460;
+    }
+
+    .apply-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .apply-btn:hover {
+      background: #5a6fd8;
+    }
+
+    /* Success Message */
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .page-title {
+        font-size: 2rem;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .jobs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">Kaamwale</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="job-seeker.html">Find Jobs</a></li>
+        <li><a href="worker.html">Find Workers</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+      <a href="help.html" class="help-btn">
+        <i class="fas fa-question-circle"></i>
+        Help
+      </a>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="container">
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">Find Work Opportunities</h1>
+        <p class="page-subtitle">Post your job requirements or browse available opportunities</p>
+      </div>
+
+      <!-- Job Posting Form -->
+      <div class="job-form-container">
+        <h2 class="form-title">Post a Job Requirement</h2>
+        <form id="jobForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="serviceType">Service Type</label>
+              <select id="serviceType" required>
+                <option value="">Select Service</option>
+                <option value="cleaning">Cleaning & Pest Control</option>
+                <option value="electrician">Electrician</option>
+                <option value="plumber">Plumber</option>
+                <option value="carpenter">Carpenter</option>
+                <option value="painter">Painter</option>
+                <option value="appliance">Appliance Repair</option>
+                <option value="beauty">Beauty Services</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" placeholder="Enter your location" required>
+            </div>
+
+            <div class="form-group">
+              <label for="budget">Budget (₹)</label>
+              <input type="number" id="budget" placeholder="Enter your budget" required>
+            </div>
+
+            <div class="form-group">
+              <label for="urgency">Urgency</label>
+              <select id="urgency" required>
+                <option value="">Select Urgency</option>
+                <option value="urgent">Urgent (Within 2 hours)</option>
+                <option value="normal">Normal (Within 24 hours)</option>
+                <option value="flexible">Flexible (Within a week)</option>
+              </select>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="description">Job Description</label>
+              <textarea id="description" placeholder="Describe your requirements in detail..." required></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i>
+            Post Job Requirement
+          </button>
+
+          <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            Job requirement posted successfully! Workers will contact you soon.
+          </div>
+        </form>
+      </div>
+
+      <!-- Available Jobs -->
+      <div class="job-listings">
+        <h2 class="section-title">Available Job Opportunities</h2>
+        <div class="jobs-grid" id="jobsGrid">
+          <!-- Jobs will be loaded here -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Sample job data
+    const sampleJobs = [
+      {
+        title: "Plumbing Repair Needed",
+        location: "Sector 18, Noida",
+        budget: 500,
+        description: "Kitchen sink is leaking and needs immediate repair. Also need to check bathroom faucet.",
+        urgency: "urgent",
+        postedTime: "2 hours ago"
+      },
+      {
+        title: "House Cleaning Service",
+        location: "DLF Phase 2, Gurgaon",
+        budget: 800,
+        description: "Need deep cleaning for 3BHK apartment. Include kitchen, bathrooms, and all rooms.",
+        urgency: "normal",
+        postedTime: "5 hours ago"
+      },
+      {
+        title: "Electrical Wiring Work",
+        location: "Lajpat Nagar, Delhi",
+        budget: 1200,
+        description: "New electrical connections needed for 2 rooms. Safety switches and LED installation.",
+        urgency: "normal",
+        postedTime: "1 day ago"
+      },
+      {
+        title: "Furniture Assembly",
+        location: "Koramangala, Bangalore",
+        budget: 600,
+        description: "Need carpenter to assemble new furniture - wardrobe, bed, and study table.",
+        urgency: "flexible",
+        postedTime: "2 days ago"
+      }
+    ];
+
+    // Load jobs on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadJobs();
+    });
+
+    // Job form submission
+    document.getElementById('jobForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        serviceType: document.getElementById('serviceType').value,
+        location: document.getElementById('location').value,
+        budget: document.getElementById('budget').value,
+        urgency: document.getElementById('urgency').value,
+        description: document.getElementById('description').value
+      };
+
+      // Simulate job posting
+      setTimeout(() => {
+        document.getElementById('successMessage').style.display = 'block';
+        this.reset();
+        
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          document.getElementById('successMessage').style.display = 'none';
+        }, 3000);
+      }, 1000);
+    });
+
+    // Load and display jobs
+    function loadJobs() {
+      const jobsGrid = document.getElementById('jobsGrid');
+      
+      sampleJobs.forEach(job => {
+        const jobCard = createJobCard(job);
+        jobsGrid.appendChild(jobCard);
+      });
+    }
+
+    // Create job card element
+    function createJobCard(job) {
+      const card = document.createElement('div');
+      card.className = 'job-card';
+      
+      card.innerHTML = `
+        <div class="job-header">
+          <div>
+            <div class="job-title">${job.title}</div>
+            <div class="job-location">
+              <i class="fas fa-map-marker-alt"></i> ${job.location}
+            </div>
+          </div>
+          <div class="job-budget">₹${job.budget}</div>
+        </div>
+        
+        <div class="job-description">${job.description}</div>
+        
+        <div class="job-meta">
+          <span class="job-urgency ${job.urgency}">${job.urgency.charAt(0).toUpperCase() + job.urgency.slice(1)}</span>
+          <span>${job.postedTime}</span>
+          <button class="apply-btn" onclick="applyForJob('${job.title}')">Apply Now</button>
+        </div>
+      `;
+      
+      return card;
+    }
+
+    // Apply for job function
+    function applyForJob(jobTitle) {
+      alert(`Application submitted for: ${jobTitle}\n\nYou will be contacted by the job poster soon!`);
+    }
+  </script>
+</body>
+</html>

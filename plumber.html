@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plumber Services - Hire Professionals</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    .navbar {
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+    }
+    .logo-text { font-size: 28px; font-weight: bold; color: #fff; }
+    .nav-menu { display: flex; list-style: none; gap: 30px; }
+    .nav-link {
+      text-decoration: none; color: #fff; padding: 10px 15px;
+      border-radius: 8px; transition: all .3s ease; font-weight: 500;
+    }
+    .nav-link:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+    .nav-auth { display: flex; gap: 15px; }
+    .auth-btn {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; padding: 10px 20px;
+      border-radius: 25px; font-weight: 600; transition: all .3s ease;
+      border: 2px solid transparent;
+    }
+    .login-btn { color: #fff; border-color: rgba(255,255,255,0.3); }
+    .login-btn:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+    .register-btn { background: #fff; color: #0ea5e9; border-color: #fff; }
+    .register-btn:hover { background: #f8f9fa; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+    .star-rating { color: #fbbf24; }
+    .availability-available { background: #d1fafb; color: #065f69; }
+    .availability-unavailable { background: #fafafa; color: #7f7f7f; }
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+/* Logo */
+.nav-logo .logo-link {
+    text-decoration: none;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link i {
+    font-size: 16px;
+}
+
+/* Auth Buttons */
+.nav-auth {
+    display: flex;
+    gap: 15px;
+}
+
+.auth-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.login-btn {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.login-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+.register-btn {
+    background-color: #fff;
+    color: #667eea;
+    border-color: #fff;
+}
+
+.register-btn:hover {
+    background-color: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.category-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation */
+}
+
+.category-card:hover {
+  transform: translateY(-10px) scale(1.05); /* Moves up slightly and grows */
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2); /* Shadow intensifies */
+}
+
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div class="nav-logo">
+      <a href="#" class="logo-link">
+        <span class="logo-text">Kaamwale</span>
+      </a>
+    </div>
+
+    <!-- Navigation Menu -->
+    <ul class="nav-menu">
+      <li class="nav-item">
+        <a href="service.html" class="nav-link active">
+          <i class="fas fa-home"></i>
+          <span>Home</span>
+        </a>
+      </li>
+     
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fas fa-hard-hat"></i>
+          <span>Workers</span>
+        </a>
+      </li>
+      <!-- New Service Item -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fas fa-concierge-bell"></i>
+          <span>Services</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fas fa-question-circle"></i>
+          <span>Help</span>
+        </a>
+      </li>
+    </ul>
+
+    
+
+    <!-- Mobile Menu Toggle -->
+    <div class="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+  </header>
+
+  <main class="container mx-auto p-4">
+    <!-- Plumbing Categories -->
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Service Categories</h2>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer" data-category="pipe">
+          <img src="pipeins.png" alt="Pipe installation illustration"/>
+          <h3 class="text-xl font-medium mt-2">Pipe Installation</h3>
+        </div>
+        <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer" data-category="leak">
+          <img src="pipleak.png" alt="Leak fixing illustration"/>
+          <h3 class="text-xl font-medium mt-2">Leak Repairs</h3>
+        </div>
+        <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer" data-category="fitting">
+          <img src="fitt.png" alt="Tap and fitting illustration"/>
+          <h3 class="text-xl font-medium mt-2">Fittings</h3>
+        </div>
+        <div class="category-card bg-white p-4 rounded-lg shadow-md cursor-pointer" data-category="maintenance">
+          <img src="maint.png" alt="Maintenance check illustration"/>
+          <h3 class="text-xl font-medium mt-2">Maintenance</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Worker Profiles -->
+    <section id="workers">
+      <h2 class="text-2xl font-semibold mb-4">Available Plumbers</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Worker 1 -->
+        <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="pipe">
+          <div class="flex items-center mb-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922506.png" alt="Plumber profile" class="w-16 h-16 rounded-full mr-4"/>
+            <div>
+              <h3 class="text-xl font-medium">Raj Kumar</h3>
+              <p class="text-gray-600">Pipe Installation Specialist</p>
+            </div>
+          </div>
+          <div class="mb-2">
+            <span class="font-medium">Rating:</span>
+            <div class="star-rating inline-block">★★★★★ <span class="text-gray-700">(4.9/5)</span></div>
+          </div>
+          <p class="mb-2"><span class="font-medium">Experience:</span> 14 years</p>
+          <p class="mb-2"><span class="font-medium">Availability:</span> <span class="px-2 py-1 rounded-full text-sm availability-available">Available Today</span></p>
+          <p class="font-medium mb-4">Cost: ₹500/hour</p>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire Now</button>
+        </div>
+
+        <!-- Worker 2 -->
+        <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="leak">
+          <div class="flex items-center mb-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/201/201634.png" alt="Plumber woman" class="w-16 h-16 rounded-full mr-4"/>
+            <div>
+              <h3 class="text-xl font-medium">Anita Sharma</h3>
+              <p class="text-gray-600">Leak Repair Expert</p>
+            </div>
+          </div>
+          <div class="mb-2">
+            <span class="font-medium">Rating:</span>
+            <div class="star-rating inline-block">★★★★☆ <span class="text-gray-700">(4.6/5)</span></div>
+          </div>
+          <p class="mb-2"><span class="font-medium">Experience:</span> 9 years</p>
+          <p class="mb-2"><span class="font-medium">Availability:</span> <span class="px-2 py-1 rounded-full text-sm availability-available">Available Tomorrow</span></p>
+          <p class="font-medium mb-4">Cost: ₹450/hour</p>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire Now</button>
+        </div>
+
+        <!-- Worker 3 -->
+        <div class="worker-card bg-white p-6 rounded-lg shadow-md" data-category="fitting">
+          <div class="flex items-center mb-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/2922/2922656.png" alt="Plumber profile" class="w-16 h-16 rounded-full mr-4"/>
+            <div>
+              <h3 class="text-xl font-medium">Suresh Patel</h3>
+              <p class="text-gray-600">Tap & Fitting Specialist</p>
+            </div>
+          </div>
+          <div class="mb-2">
+            <span class="font-medium">Rating:</span>
+            <div class="star-rating inline-block">★★★★★ <span class="text-gray-700">(5.0/5)</span></div>
+          </div>
+          <p class="mb-2"><span class="font-medium">Experience:</span> 11 years</p>
+          <p class="mb-2"><span class="font-medium">Availability:</span> <span class="px-2 py-1 rounded-full text-sm availability-unavailable">Unavailable till Friday</span></p>
+          <p class="font-medium mb-4">Cost: ₹600/hour</p>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Hire Now</button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-800 text-white p-4 mt-8">
+    <div class="container mx-auto text-center">
+      <p>© 2023 Plumber Services. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Category filter
+    document.querySelectorAll('.category-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const category = this.dataset.category;
+        const workerCards = document.querySelectorAll('.worker-card');
+        workerCards.forEach(wcard => {
+          wcard.style.display = (wcard.dataset.category === category) ? 'block' : 'none';
+        });
+      });
+    });
+
+    
+  </script>
+</body>
+</html>
